@@ -1,7 +1,7 @@
 This is a fork from https://salsa.debian.org/nvidia-team/nvidia-graphics-drivers
 
 I made a few modifications for building Debian packages for version 515.76 
-that is not available from Debian sources and even their Gitlab.
+that is not available yet from Debian sources and even their Gitlab.
 
 Instructions for building.
 
