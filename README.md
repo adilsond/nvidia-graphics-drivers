@@ -24,13 +24,19 @@ Now prepare more two packages
 Leve the repo folder and do this.
 
 mkdir nvidia-graphics-drivers_515.76.orig-amd64
+
 cp nvidia-graphics-drivers/amd64/NVIDIA-Linux-x86_64-515.76.run nvidia-graphics-drivers_515.76.orig-amd64
+
 tar -zcvvf nvidia-graphics-drivers_515.76.orig-amd64.tar.gz nvidia-graphics-drivers_515.76.orig-amd64
+
 rm -rf nvidia-graphics-drivers_515.76.orig-amd64
 
 mkdir nvidia-graphics-drivers_515.76.orig-arm64
+
 cp nvidia-graphics-drivers/arm64/NVIDIA-Linux-aarch64-515.76.run nvidia-graphics-drivers_515.76.orig-arm64
+
 tar -zcvvf nvidia-graphics-drivers_515.76.orig-arm64.tar.gz nvidia-graphics-drivers_515.76.orig-arm64
+
 rm -rf nvidia-graphics-drivers_515.76.orig-arm64
 
 cd nvidia-graphics-drivers
@@ -41,4 +47,22 @@ or/and
 
 debuild -ai386 -d
 
+If the second command fails:
+
+mv arm64 .. 
+
+mv amd64 ..
+
+git add .
+
+git reset --hard origin/master
+
+mv ../arm64 .
+mv ../amd64 .
+
+debuild -ai386 -d
+
 And wait a few minutes until all packages are done.
+
+It worked on my machine with a Nvidia GPU but be warned that they are experimental and got from Debian's experimental repository. Use them at your own 
+risk.
