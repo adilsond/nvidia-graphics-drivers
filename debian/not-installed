@@ -26,8 +26,8 @@ nvidia-settings
 nvidia-settings.1
 nvidia-settings.desktop
 nvidia-settings.png
-libnvidia-gtk2.so.#VERSION#
-libnvidia-gtk3.so.#VERSION#
+libnvidia-gtk2.so.515.76
+libnvidia-gtk3.so.515.76
 
 # built from src:nvidia-xconfig
 nvidia-xconfig
@@ -61,6 +61,11 @@ nvidia-dbus.conf
 
 nvidia-ngx-updater
 
-libEGL.so.#VERSION#
+libEGL.so.515.76
 
-libnvidia-compiler-next.so.#VERSION#
+libnvidia-compiler-next.so.515.76
+
+#kernel-open excluded
+kernel-open/*
+
+libnvidia-wayland-client.so.*

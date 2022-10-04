@@ -1,3 +1,9 @@
+nvidia-graphics-drivers (515.76-0.1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Adilson dos Santos Dantas <adilson@adilson.net.br>  Mon, 03 Oct 2022 10:18:36 -0300
+
 nvidia-graphics-drivers (510.85.02-2) experimental; urgency=medium
 
   * Merge changes from 470.141.03-2.

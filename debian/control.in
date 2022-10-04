@@ -634,6 +634,7 @@ Depends:
 Suggests:
  libegl-${nvidia-}0 [i386 amd64 ${arch:arm64} ${arch:ppc64el}]
  | libegl-nvidia-tesla0 [i386 amd64 arm64 ppc64el]
+ | libegl-nvidia-tesla-515-0 [i386 amd64 arm64 ppc64el]
  | libegl-nvidia-tesla-510-0 [i386 amd64 arm64 ppc64el]
  | libegl-nvidia-tesla-470-0 [i386 amd64 arm64 ppc64el]
  | libegl-nvidia-tesla-450-0 [i386 amd64 arm64 ppc64el]
@@ -706,6 +707,7 @@ Depends:
 Suggests:
  ${nvidia}-vulkan-icd [i386 amd64 ${arch:arm64} ${arch:ppc64el}]
  | nvidia-tesla-vulkan-icd [i386 amd64 arm64 ppc64el]
+ | nvidia-tesla-515-vulkan-icd [i386 amd64 arm64 ppc64el]
  | nvidia-tesla-510-vulkan-icd [i386 amd64 arm64 ppc64el]
  | nvidia-tesla-470-vulkan-icd [i386 amd64 arm64 ppc64el]
  | nvidia-tesla-450-vulkan-icd [i386 amd64 arm64 ppc64el]
@@ -760,6 +762,7 @@ Suggests:
 Conflicts:
  libgl1-${nvidia}-glvnd-glx,
  libgl1-nvidia-tesla-glvnd-glx,
+ libgl1-nvidia-tesla-515-glvnd-glx,
  libgl1-nvidia-tesla-510-glvnd-glx,
  libgl1-nvidia-tesla-470-glvnd-glx,
  libgl1-nvidia-tesla-460-glvnd-glx,
@@ -1120,6 +1123,7 @@ Depends:
 Suggests:
  ${nvidia}-opencl-icd [i386 amd64 ${arch:arm64} ${arch:ppc64el}]
  | nvidia-tesla-opencl-icd [i386 amd64 arm64 ppc64el]
+ | nvidia-tesla-515-opencl-icd [i386 amd64 arm64 ppc64el]
  | nvidia-tesla-510-opencl-icd [i386 amd64 arm64 ppc64el]
  | nvidia-tesla-470-opencl-icd [i386 amd64 arm64 ppc64el]
  | nvidia-tesla-450-opencl-icd [i386 amd64 arm64 ppc64el]
@@ -1200,7 +1204,7 @@ Depends:
 Description: NVIDIA GPU detection utility
  The 'nvidia-detect' script in this package checks for an NVIDIA GPU in the
  system and recommends one of the non-free accelerated driver meta-packages
- (nvidia-driver, nvidia-tesla-driver,
+ (nvidia-driver, nvidia-tesla-driver, nvidia-testla-515-driver,
  nvidia-tesla-510-driver, nvidia-tesla-470-driver,
  nvidia-tesla-450-driver, nvidia-tesla-418-driver,
  or nvidia-legacy-390xx-driver) for installation.

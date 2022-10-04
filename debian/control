@@ -9,6 +9,9 @@ Uploaders:
  Luca Boccassi <bluca@debian.org>,
 Vcs-Browser: https://salsa.debian.org/nvidia-team/nvidia-graphics-drivers
 Vcs-Git: https://salsa.debian.org/nvidia-team/nvidia-graphics-drivers.git
+Homepage: https://www.nvidia.com
+Standards-Version: 4.6.1
+Rules-Requires-Root: no
 Build-Depends:
  debhelper-compat (= 13),
 Build-Depends-Arch:
@@ -22,9 +25,6 @@ Build-Depends-Arch:
  quilt,
  xz-utils,
  libglvnd-dev,
-Rules-Requires-Root: no
-Standards-Version: 4.6.1
-Homepage: https://www.nvidia.com
 Testsuite: autopkgtest-pkg-dkms
 XS-Autobuild: yes
 
@@ -76,9 +76,6 @@ Pre-Depends:
 Depends:
  glx-alternative-nvidia (>= 1.2),
  ${misc:Depends}
-Provides:
- nvidia-alternative-any,
- ${nvidia}-alternative--kmod-alias,
 Conflicts:
  libglvnd0-nvidia,
  libopengl0-glvnd-nvidia,
@@ -87,6 +84,9 @@ Conflicts:
  libegl1-glvnd-nvidia,
  libgles1-glvnd-nvidia,
  libgles2-glvnd-nvidia,
+Provides:
+ nvidia-alternative-any,
+ ${nvidia}-alternative--kmod-alias,
 Description: allows the selection of NVIDIA as GLX provider${nvidia:VariantDesc}
  In setups with several NVIDIA driver versions installed (e.g. current and
  legacy) this metapackage registers an alternative to allow easy switching
@@ -108,12 +108,12 @@ Depends:
  nvidia-kernel-common (>= 20151021),
  nvidia-modprobe (>= ${nvidia:Version:major}),
  ${misc:Depends}
+Conflicts:
+ firmware-nvidia-gsp-${nvidia:Version} [${nvidia:arches:gsp}],
 Provides:
  nvidia-kernel-support-any,
  ${nvidia}-kernel-support--v1,
  firmware-${nvidia}-gsp (= ${nvidia:Version}) [${nvidia:arches:gsp}],
- firmware-nvidia-gsp-${nvidia:Version} [${nvidia:arches:gsp}],
-Conflicts:
  firmware-nvidia-gsp-${nvidia:Version} [${nvidia:arches:gsp}],
 Description: NVIDIA binary kernel module support files${nvidia:VariantDesc}
  The NVIDIA binary driver provides optimized hardware acceleration of
@@ -249,9 +249,9 @@ Depends:
  ${shlibs:Depends}, ${misc:Depends}
 Recommends:
  ${nvidia}-driver,
-Provides:
- nvidia-driver-bin-${nvidia:Version},
 Conflicts:
+ nvidia-driver-bin-${nvidia:Version},
+Provides:
  nvidia-driver-bin-${nvidia:Version},
 Description: NVIDIA driver support binaries${nvidia:VariantDesc}
  The NVIDIA binary driver provides optimized hardware acceleration of
@@ -295,8 +295,6 @@ Recommends:
  lib${nvidia}-encode1 (= ${binary:Version}),
  ${nvidia}-vulkan-icd (= ${binary:Version}),
  lib${nvidia}-allocator1 (= ${binary:Version}),
-Provides:
- nvidia-driver-libs-any,
 Conflicts:
  libglvnd0-nvidia,
  libopengl0-glvnd-nvidia,
@@ -311,6 +309,8 @@ Breaks:
  libgl1-${nvidia}-glx,
  libegl1-${nvidia},
  ${nvidia}-nonglvnd-vulkan-icd,
+Provides:
+ nvidia-driver-libs-any,
 Description: NVIDIA metapackage (OpenGL/GLX/EGL/GLES libraries)${nvidia:VariantDesc}
  This metapackage depends on the NVIDIA binary libraries
  that provide optimized hardware acceleration of
@@ -366,9 +366,9 @@ Pre-Depends:
  ${misc:Pre-Depends}
 Depends:
  ${shlibs:Depends}, ${misc:Depends}
-Provides:
- libnvidia-glcore-${nvidia:Version},
 Conflicts:
+ libnvidia-glcore-${nvidia:Version},
+Provides:
  libnvidia-glcore-${nvidia:Version},
 Description: NVIDIA binary OpenGL/GLX core libraries${nvidia:VariantDesc}
  The NVIDIA binary driver provides optimized hardware acceleration of
@@ -455,9 +455,9 @@ Pre-Depends:
  ${misc:Pre-Depends}
 Depends:
  ${shlibs:Depends}, ${misc:Depends}
-Provides:
- libnvidia-eglcore-${nvidia:Version},
 Conflicts:
+ libnvidia-eglcore-${nvidia:Version},
+Provides:
  libnvidia-eglcore-${nvidia:Version},
 Description: NVIDIA binary EGL core libraries${nvidia:VariantDesc}
  EGL provides a platform-agnostic mechanism for creating rendering surfaces
@@ -479,6 +479,7 @@ Depends:
 Suggests:
  libegl-${nvidia-}0 [i386 amd64 ${arch:arm64} ${arch:ppc64el}]
  | libegl-nvidia-tesla0 [i386 amd64 arm64 ppc64el]
+ | libegl-nvidia-tesla-515-0 [i386 amd64 arm64 ppc64el]
  | libegl-nvidia-tesla-510-0 [i386 amd64 arm64 ppc64el]
  | libegl-nvidia-tesla-470-0 [i386 amd64 arm64 ppc64el]
  | libegl-nvidia-tesla-450-0 [i386 amd64 arm64 ppc64el]
@@ -551,6 +552,7 @@ Depends:
 Suggests:
  ${nvidia}-vulkan-icd [i386 amd64 ${arch:arm64} ${arch:ppc64el}]
  | nvidia-tesla-vulkan-icd [i386 amd64 arm64 ppc64el]
+ | nvidia-tesla-515-vulkan-icd [i386 amd64 arm64 ppc64el]
  | nvidia-tesla-510-vulkan-icd [i386 amd64 arm64 ppc64el]
  | nvidia-tesla-470-vulkan-icd [i386 amd64 arm64 ppc64el]
  | nvidia-tesla-450-vulkan-icd [i386 amd64 arm64 ppc64el]
@@ -582,11 +584,11 @@ Suggests:
  vulkan-utils,
 Enhances:
  libvulkan1,
+Conflicts:
+ ${nvidia}-nonglvnd-vulkan-icd,
 Provides:
  vulkan-icd,
  nvidia-vulkan-icd-any,
-Conflicts:
- ${nvidia}-nonglvnd-vulkan-icd,
 Description: NVIDIA Vulkan installable client driver (ICD)${nvidia:VariantDesc}
  Vulkan is a multivendor open standard by the Khronos Group for 3D graphics.
  .
@@ -605,6 +607,7 @@ Suggests:
 Conflicts:
  libgl1-${nvidia}-glvnd-glx,
  libgl1-nvidia-tesla-glvnd-glx,
+ libgl1-nvidia-tesla-515-glvnd-glx,
  libgl1-nvidia-tesla-510-glvnd-glx,
  libgl1-nvidia-tesla-470-glvnd-glx,
  libgl1-nvidia-tesla-460-glvnd-glx,
@@ -626,9 +629,9 @@ Pre-Depends:
  ${misc:Pre-Depends}
 Depends:
  ${shlibs:Depends}, ${misc:Depends}
-Provides:
- libnvidia-glvkspirv-${nvidia:Version}
 Conflicts:
+ libnvidia-glvkspirv-${nvidia:Version}
+Provides:
  libnvidia-glvkspirv-${nvidia:Version}
 Description: NVIDIA binary Vulkan Spir-V compiler library${nvidia:VariantDesc}
  Vulkan is a multivendor open standard by the Khronos Group for 3D graphics.
@@ -646,9 +649,9 @@ Pre-Depends:
  ${misc:Pre-Depends}
 Depends:
  ${shlibs:Depends}, ${misc:Depends}
-Provides:
- libnvidia-rtcore-${nvidia:Version},
 Conflicts:
+ libnvidia-rtcore-${nvidia:Version},
+Provides:
  libnvidia-rtcore-${nvidia:Version},
 Description: NVIDIA binary Vulkan ray tracing (rtcore) library${nvidia:VariantDesc}
  Vulkan is a multivendor open standard by the Khronos Group for 3D graphics.
@@ -779,9 +782,9 @@ Pre-Depends:
  ${misc:Pre-Depends}
 Depends:
  ${shlibs:Depends}, ${misc:Depends}
-Provides:
- libnvidia-compiler-${nvidia:Version},
 Conflicts:
+ libnvidia-compiler-${nvidia:Version},
+Provides:
  libnvidia-compiler-${nvidia:Version},
 Description: NVIDIA runtime compiler library${nvidia:VariantDesc}
  The Compute Unified Device Architecture (CUDA) enables NVIDIA
@@ -933,6 +936,7 @@ Depends:
 Suggests:
  ${nvidia}-opencl-icd [i386 amd64 ${arch:arm64} ${arch:ppc64el}]
  | nvidia-tesla-opencl-icd [i386 amd64 arm64 ppc64el]
+ | nvidia-tesla-515-opencl-icd [i386 amd64 arm64 ppc64el]
  | nvidia-tesla-510-opencl-icd [i386 amd64 arm64 ppc64el]
  | nvidia-tesla-470-opencl-icd [i386 amd64 arm64 ppc64el]
  | nvidia-tesla-450-opencl-icd [i386 amd64 arm64 ppc64el]
@@ -979,6 +983,10 @@ Depends:
  ${shlibs:Depends}, ${misc:Depends}
 Recommends:
  ${nvidia}-opencl-icd | opencl-icd,
+Conflicts:
+ libopencl1,
+Replaces:
+ libopencl1,
 Provides:
  libopencl1,
  libopencl-1.1-1,
@@ -987,10 +995,6 @@ Provides:
  libopencl-2.1-1,
  libopencl-2.2-1,
  libopencl-3.0-1,
-Conflicts:
- libopencl1,
-Replaces:
- libopencl1,
 Description: NVIDIA OpenCL ICD Loader library
  OpenCL (Open Computing Language) is a multivendor open standard for
  general-purpose parallel programming of heterogeneous systems that include
@@ -1013,7 +1017,7 @@ Depends:
 Description: NVIDIA GPU detection utility
  The 'nvidia-detect' script in this package checks for an NVIDIA GPU in the
  system and recommends one of the non-free accelerated driver meta-packages
- (nvidia-driver, nvidia-tesla-driver,
+ (nvidia-driver, nvidia-tesla-driver, nvidia-testla-515-driver,
  nvidia-tesla-510-driver, nvidia-tesla-470-driver,
  nvidia-tesla-450-driver, nvidia-tesla-418-driver,
  or nvidia-legacy-390xx-driver) for installation.
